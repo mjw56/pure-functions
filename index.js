@@ -31,3 +31,21 @@ function multiplyCheat(a) {
 console.log(
   expect(multiplyCheat('var b = 2;')).toEqual(4)
 );
+
+// impure - bad
+function modifyImpure(param) {
+  var copy = param;
+  copy.bar = 'baz';
+
+  return copy;
+}
+
+// pure - good
+function modifyPure(param) {
+  return Object.assign({}, param, { bar: 'baz' });
+}
+
+console.log(
+  expect(modifyPure({foo: 'bar'}))
+  .toEqual({ foo: 'bar', bar: 'baz' })
+);
